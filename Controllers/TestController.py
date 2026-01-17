@@ -29,6 +29,8 @@ async def get_db_connection():
 async def get_all():
     conn = None
     try:
+        # Cause a runtime error
+        result = 1 / 0  # This will raise ZeroDivisionError
         conn = await get_db_connection()
         async with conn.cursor() as cur:
             # Set search_path to public schema (required because isolated role has restricted search_path)
