@@ -1,0 +1,19 @@
+# Nixpacks configuration for Railway - Python/FastAPI Backend
+# Backend files are at root level
+
+[phases.setup]
+nixPkgs = { python = "3.12" }
+
+[phases.install]
+cmds = [
+  "python -m py_compile $(find . -name '*.py')",
+  "pip install -r requirements.txt"
+]
+
+[phases.build]
+cmds = [
+  "python validate_imports.py"
+]
+
+[start]
+cmd = "python -m uvicorn main:app --host 0.0.0.0 --port $PORT --lifespan on"
